@@ -18,7 +18,7 @@ module Authors
       @post = current_author.posts.build(post_params)
 
       if @post.save
-        redirect_to @post, notice: 'Post was successfully created.'
+        redirect_to edit_post_path(@post)
       else
         render :new
       end
@@ -26,7 +26,7 @@ module Authors
 
     def update
       if @post.update(post_params)
-        redirect_to posts_path, notice: 'Post was successfully updated.'
+        redirect_to edit_post_path(@post)
       else
         render :edit
       end
@@ -43,7 +43,7 @@ module Authors
       end
 
       def post_params
-        params.require(:post).permit(:title, :description)
+        params.require(:post).permit(:title, :description, :header_image)
       end
   end
 end

@@ -4,8 +4,8 @@
       <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
 
       <ul>
-        <% post.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <% post.errors.full_messages.each do |error| %>
+          <li><%= message %></li>
         <% end %>
       </ul>
     </div>
@@ -19,6 +19,17 @@
   <div class="form-group">
     <%= form.label :description %>
     <%= form.text_area :description, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :header_image %>
+    <%= form.file_field :header_image, class: 'form-control' %>
+    <div class="mt-1">
+      <small> Current image: </small>
+      <% if post.header_image.present? %>
+        <%= image_tag(post.header_image, width: '100%') %>
+      <% end %>   
+    </div>
   </div>
 
   <div class="actions">
